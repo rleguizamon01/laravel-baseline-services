@@ -17,6 +17,7 @@ class BaseService
                 return $callback();
         } catch (\Throwable $throwable) {
             Log::error("A '{$throwable->getCode()}' error occurred in " . get_class($this) . ": {$throwable->getMessage()}");
+            throw $throwable;
         }
     }
 }

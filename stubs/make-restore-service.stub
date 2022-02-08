@@ -1,0 +1,18 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ moduleNamespace }}\{{ class }};
+
+class Restore{{ class }}Service extends Common{{ class }}Service
+{
+    public function __invoke($id)
+    {
+        return $this->logErrors(fn() => $this->restore($id));
+    }
+
+    private function restore($id)
+    {
+        return {{ class }}::withTrashed()->findOrFail($id)->restore();
+    }
+}

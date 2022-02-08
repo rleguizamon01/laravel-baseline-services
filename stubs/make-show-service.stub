@@ -1,0 +1,18 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ moduleNamespace }}\{{ class }};
+
+class Show{{ class }}Service extends Common{{ class }}Service
+{
+    public function __invoke($request, $id)
+    {
+        return $this->logErrors(fn() => $this->show($request, $id));
+    }
+
+    private function show($request, $id)
+    {
+        return {{ class }}::findOrFail($id);
+    }
+}

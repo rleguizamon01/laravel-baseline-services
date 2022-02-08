@@ -1,0 +1,18 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ moduleNamespace }}\{{ class }};
+
+class Destroy{{ class }}Service extends Common{{ class }}Service
+{
+    public function __invoke($id)
+    {
+        return $this->logErrors(fn() => $this->destroy($id));
+    }
+
+    private function destroy($id)
+    {
+        return {{ class }}::findOrFail($id)->delete();
+    }
+}

@@ -1,0 +1,18 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ moduleNamespace }}\{{ class }};
+
+class Store{{ class }}Service extends Common{{ class }}Service
+{
+    public function __invoke($request)
+    {
+        return $this->logErrors(fn() => $this->store($request), true);
+    }
+
+    private function store($request)
+    {
+        return {{ class }}::create([]);
+    }
+}

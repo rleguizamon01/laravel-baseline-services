@@ -1,0 +1,24 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ moduleNamespace }}\{{ class }};
+
+class Update{{ class }}Service extends Common{{ class }}Service
+{
+    public function __invoke($request, $id)
+    {
+        return $this->logErrors(fn() => $this->update($request, $id), true);
+    }
+
+    private function update($request, $id)
+    {
+        ${{ singularCamelCaseClass }} = {{ class }}::findOrFail($id);
+
+        ${{ singularCamelCaseClass }}->update([
+            //
+        ]);
+
+        return ${{ singularCamelCaseClass }};
+    }
+}

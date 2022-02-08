@@ -1,0 +1,19 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Http\Controllers\Controller;
+use {{ serviceNamespace }}\Show{{ class }}Service;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Request;
+
+class Show{{ class }}Controller extends Controller
+{
+    public function __construct(private Show{{ class }}Service $show{{ class }}Service) {}
+
+    public function __invoke(Request $request, $id)
+    {
+        ${{ singularCamelCaseClass }} = $this->show{{ class }}Service->__invoke($request, $id);
+        return response()->json(${{ singularCamelCaseClass }}, Response::HTTP_OK);
+    }
+}

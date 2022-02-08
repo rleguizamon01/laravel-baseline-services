@@ -1,0 +1,14 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', '{{ namespace }}\Controllers\Index{{ class }}Controller@__invoke');
+Route::get('/{id}', '{{ namespace }}\Controllers\Show{{ class }}Controller@__invoke');
+
+Route::post('/', '{{ namespace }}\Controllers\Store{{ class }}Controller@__invoke');
+Route::post('/{id}/restore', '{{ namespace }}\Controllers\Restore{{ class }}Controller@__invoke');
+
+Route::put('/{id}', '{{ namespace }}\Controllers\Update{{ class }}Controller@__invoke');
+
+Route::delete('/{id}', '{{ namespace }}\Controllers\Destroy{{ class }}Controller@__invoke');
+

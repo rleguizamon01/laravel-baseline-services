@@ -1,0 +1,18 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Http\Controllers\Controller;
+use {{ serviceNamespace }}\Restore{{ class }}Service;
+use Symfony\Component\HttpFoundation\Response;
+
+class Restore{{ class }}Controller extends Controller
+{
+    public function __construct(private Restore{{ class }}Service $restore{{ class }}Service) {}
+
+    public function __invoke($id)
+    {
+        $restored{{ class }} = $this->restore{{ class }}Service->__invoke($id);
+        return response()->json($restored{{ class }}, Response::HTTP_OK);
+    }
+}

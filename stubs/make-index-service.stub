@@ -1,0 +1,34 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ moduleNamespace }}\{{ class }};
+
+class Index{{ class }}Service extends Common{{ class }}Service
+{
+    public function __invoke($request)
+    {
+        return $this->logErrors(fn() => $this->index($request));
+    }
+
+    private function index($request)
+    {
+        ${{ pluralCamelCaseClass }} = {{ class }}::query();
+
+        if($request->has('relations') && $request->relations != '*')
+            ${{ pluralCamelCaseClass }}->with($request->relations);
+        else
+            ${{ pluralCamelCaseClass }}->with($this->relations);
+
+        if($request->has('search_column'))
+            ${{ pluralCamelCaseClass }}->where($request->search_column, $request->search_value);
+
+        if($request->has('order_by'))
+            ${{ pluralCamelCaseClass }}->orderBy($request->order_by, $request->order_direction);
+
+        if($request->has('page'))
+            return ${{ pluralCamelCaseClass }}->paginate($request->page_size ?? 15);
+        else
+            return ${{ pluralCamelCaseClass }}->get();
+    }
+}

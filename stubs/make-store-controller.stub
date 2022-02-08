@@ -1,0 +1,20 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Http\Controllers\Controller;
+use {{ requestNamespace }}\Store{{ class }}Request;
+use {{ serviceNamespace }}\Store{{ class }}Service;
+use Symfony\Component\HttpFoundation\Response;
+
+class Store{{ class }}Controller extends Controller
+{
+    public function __construct(private Store{{ class }}Service $store{{ class }}Service) {}
+
+    public function __invoke(Store{{ class }}Request $request)
+    {
+        $new{{ class }} = $this->store{{ class }}Service->__invoke($request);
+        return response()->json($new{{ class }}, Response::HTTP_CREATED);
+    }
+}
+

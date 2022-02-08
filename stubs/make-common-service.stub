@@ -1,0 +1,10 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Services\BaseService;
+
+class Common{{ class }}Service extends BaseService
+{
+    protected array $relations = [];
+}

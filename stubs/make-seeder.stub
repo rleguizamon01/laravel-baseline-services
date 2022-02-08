@@ -1,0 +1,16 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ moduleNamespace }}\{{ class }};
+use Database\Seeders\BaseSeeder;
+
+class {{ class }}Seeder extends BaseSeeder
+{
+    public function run()
+    {
+        if(!$this->shouldRun()) return;
+
+        {{ class }}::factory()->count(5)->create();
+    }
+}
