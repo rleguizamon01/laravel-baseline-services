@@ -1,10 +1,10 @@
 <?php
 /*
-namespace App\Modules\main\OrdersModule\Controllers;
+namespace App\Modules\mainn\OrdersModule\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Modules\main\OrdersModule\Requests\PaginateOrderRequest;
-use App\Modules\main\OrdersModule\Services\PaginateOrderService;
+use App\Modules\mainn\OrdersModule\Requests\PaginateOrderRequest;
+use App\Modules\mainn\OrdersModule\Services\PaginateOrderService;
 use Symfony\Component\HttpFoundation\Response;
 
 class PaginateOrderController extends Controller

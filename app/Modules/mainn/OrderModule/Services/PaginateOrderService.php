@@ -1,8 +1,8 @@
 <?php
 /*
-namespace App\Modules\main\OrdersModule\Services;
+namespace App\Modules\mainn\OrdersModule\Services;
 
-use App\Modules\main\OrdersModule\Order;
+use App\Modules\mainn\OrdersModule\Order;
 
 class PaginateOrderService extends CommonOrderService
 {

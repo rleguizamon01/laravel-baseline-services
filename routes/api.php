@@ -2,14 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-//Route::group(['middleware' => 'auth:sanctum'], function() {
+Route::group(['middleware' => 'auth:passport'], function() {
 
-    Route::prefix('orders')->group(function() {
-        include('App\Modules\main\OrderModule\orders-routes.php');
-    });
-
-    Route::prefix('sellers')->group(function() {
-        include('App\Modules\SellerModule\seller-routes.php');
-    });
-
-//});
+    include('routes/ApiModules/auth.php');
+    include('routes/ApiModules/main.php');
+    include('routes/ApiModules/public.php');
+});
