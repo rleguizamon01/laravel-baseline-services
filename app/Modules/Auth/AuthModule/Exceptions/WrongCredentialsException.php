@@ -3,6 +3,7 @@
 namespace App\Modules\Auth\AuthModule\Exceptions;
 
 use Exception;
+use Symfony\Component\HttpFoundation\Response;
 
 class WrongCredentialsException extends Exception
 {
@@ -14,7 +15,7 @@ class WrongCredentialsException extends Exception
     public function render($request)
     {
         return response()->json([
-            'message' => 'Credenciales incorrectas.'
-        ]);
+            'message' => 'Incorrect credentials.'
+        ], Response::HTTP_UNAUTHORIZED);
     }
 }

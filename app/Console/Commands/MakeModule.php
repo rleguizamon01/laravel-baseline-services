@@ -19,33 +19,38 @@ class MakeModule extends Command
 
     public function handle()
     {
-        Artisan::call("make:destroyControllerModule", ['name' => $this->argument('name')]);
-        Artisan::call("make:indexControllerModule", ['name' => $this->argument('name')]);
-        Artisan::call("make:restoreControllerModule", ['name' => $this->argument('name')]);
-        Artisan::call("make:showControllerModule", ['name' => $this->argument('name')]);
-        Artisan::call("make:storeControllerModule", ['name' => $this->argument('name')]);
-        Artisan::call("make:updateControllerModule", ['name' => $this->argument('name')]);
+        Artisan::call("make:destroyControllerModule", ['name' => $this->getNameInput()]);
+        Artisan::call("make:indexControllerModule", ['name' => $this->getNameInput()]);
+        Artisan::call("make:restoreControllerModule", ['name' => $this->getNameInput()]);
+        Artisan::call("make:showControllerModule", ['name' => $this->getNameInput()]);
+        Artisan::call("make:storeControllerModule", ['name' => $this->getNameInput()]);
+        Artisan::call("make:updateControllerModule", ['name' => $this->getNameInput()]);
 
-        Artisan::call("make:factoryModule", ['name' => $this->argument('name')]);
-        Artisan::call("make:seederModule", ['name' => $this->argument('name')]);
+        Artisan::call("make:factoryModule", ['name' => $this->getNameInput()]);
+        Artisan::call("make:seederModule", ['name' => $this->getNameInput()]);
 
-        Artisan::call("make:storeRequestModule", ['name' => $this->argument('name')]);
-        Artisan::call("make:updateRequestModule", ['name' => $this->argument('name')]);
+        Artisan::call("make:storeRequestModule", ['name' => $this->getNameInput()]);
+        Artisan::call("make:updateRequestModule", ['name' => $this->getNameInput()]);
 
-        Artisan::call("make:commonServiceModule", ['name' => $this->argument('name')]);
-        Artisan::call("make:destroyServiceModule", ['name' => $this->argument('name')]);
-        Artisan::call("make:indexServiceModule", ['name' => $this->argument('name')]);
-        Artisan::call("make:restoreServiceModule", ['name' => $this->argument('name')]);
-        Artisan::call("make:showServiceModule", ['name' => $this->argument('name')]);
-        Artisan::call("make:storeServiceModule", ['name' => $this->argument('name')]);
-        Artisan::call("make:updateServiceModule", ['name' => $this->argument('name')]);
+        Artisan::call("make:commonServiceModule", ['name' => $this->getNameInput()]);
+        Artisan::call("make:destroyServiceModule", ['name' => $this->getNameInput()]);
+        Artisan::call("make:indexServiceModule", ['name' => $this->getNameInput()]);
+        Artisan::call("make:restoreServiceModule", ['name' => $this->getNameInput()]);
+        Artisan::call("make:showServiceModule", ['name' => $this->getNameInput()]);
+        Artisan::call("make:storeServiceModule", ['name' => $this->getNameInput()]);
+        Artisan::call("make:updateServiceModule", ['name' => $this->getNameInput()]);
 
-        Artisan::call("make:modelModule", ['name' => $this->argument('name')]);
-        Artisan::call("make:routeModule", ['name' => $this->argument('name')]);
+        Artisan::call("make:modelModule", ['name' => $this->getNameInput()]);
+        Artisan::call("make:routeModule", ['name' => $this->getNameInput()]);
 
         Artisan::call("make:migration create_" . $this->getPluralClassName() . "_table");
 
         return 0;
+    }
+
+    protected function getNameInput()
+    {
+        return str_replace('/', '\\', $this->argument('name'));
     }
 
     protected function getPluralClassName()
@@ -55,10 +60,10 @@ class MakeModule extends Command
 
     protected function getClassName()
     {
-        $lastDashPosition = strrpos($this->argument('name'), '\\');
+        $lastDashPosition = strrpos($this->getNameInput(), '\\');
         if($lastDashPosition)
-            return substr($this->argument('name'), $lastDashPosition + 1);
+            return substr($this->getNameInput(), $lastDashPosition + 1);
         else
-            return $this->argument('name');
+            return $this->getNameInput();
     }
 }

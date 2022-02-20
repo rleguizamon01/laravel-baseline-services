@@ -3,8 +3,13 @@
 namespace App\Modules\Auth\AuthModule\Services;
 
 use App\Modules\Auth\AuthModule\Exceptions\WrongCredentialsException;
+use App\Modules\Main\UserModule\User;
 use Carbon\Carbon;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\UnauthorizedException;
 
 class LoginAuthService extends CommonAuthService
 {
@@ -15,22 +20,30 @@ class LoginAuthService extends CommonAuthService
 
     private function login($request)
     {
-        if(!Auth::attempt([$request->email, $request->password]))
-            report(new WrongCredentialsException());
+        $response = Http::asForm()->post(config('app.url') . '/oauth/token', [
+            'grant_type' => 'password',
+            'client_id' => config('app.passport_client_id'),
+            'client_secret' => config('app.passport_client_secret'),
+            'username' => $request->email,
+            'password' => $request->password,
+            'scope' => '',
+        ]);
 
-        $user = $request->user();
-        $tokenResult = $user->createToken('Personal Access Token');
-        $token = $tokenResult->token;
+        $this->catchResponseErrors($response);
 
-        if($request->has('remember_me') && $request->remember_me)
-            $token->expires_at = Carbon::now()->addWeek();
+        return $response->json();
+    }
 
-        $token->save();
+    private function catchResponseErrors($response)
+    {
+        switch($response->status()) {
+            case '400': case '404':
+                throw new WrongCredentialsException();
+        }
 
-        return [
-            'access_token' => $tokenResult->accessToken,
-            'token_type' => 'Bearer',
-            'expires_at' => Carbon::parse($token->expires_at)->toDateTimeString()
-        ];
+        if($response->status() != '200') {
+            Log::error($response->body());
+            throw new UnauthorizedException('Client authentication failed');
+        }
     }
 }

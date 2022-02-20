@@ -2,7 +2,6 @@
 
 namespace App\Modules\Auth\AuthModule\Services;
 
-use App\Modules\Auth\AuthModule\Auth;
 use App\Modules\Main\UserModule\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -18,6 +17,7 @@ class RegisterAuthService extends CommonAuthService
         $user = User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
+            'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
 

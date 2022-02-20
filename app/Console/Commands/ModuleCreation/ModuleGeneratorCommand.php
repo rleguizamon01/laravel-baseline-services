@@ -62,7 +62,6 @@ abstract class ModuleGeneratorCommand extends GeneratorCommand
         }
 
         if(str_contains($name, '\\')) {
-            echo($this->getDefaultNamespace(trim($rootNamespace, '\\')) . $this->fileName(strrchr($name, "\\")) . "\n\n");
             return $this->qualifyClass(
                 $this->getDefaultNamespace(trim($rootNamespace, '\\')) . '\\' . $this->fileName(strrchr($name, "\\"))
             );

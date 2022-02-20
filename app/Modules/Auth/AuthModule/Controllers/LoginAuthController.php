@@ -14,7 +14,7 @@ class LoginAuthController extends Controller
     public function __invoke(LoginAuthRequest $request)
     {
         $token = $this->loginAuthService->__invoke($request);
-        return response()->json($token, Response::HTTP_NO_CONTENT);
+        return response()->json($token, Response::HTTP_OK);
     }
 }
 

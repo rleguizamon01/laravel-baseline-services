@@ -2,17 +2,15 @@
 
 namespace App\Modules\Auth\AuthModule\Services;
 
-use App\Modules\Auth\AuthModule\Auth;
-
 class LogoutAuthService extends CommonAuthService
 {
-    public function __invoke($id)
+    public function __invoke($request)
     {
-        return $this->logErrors(fn() => $this->logout($id));
+        return $this->logErrors(fn() => $this->logout($request));
     }
 
-    private function logout($id)
+    private function logout($request)
     {
-        return Auth::withTrashed()->findOrFail($id)->restore();
+        $request->user()->token()->revoke();
     }
 }

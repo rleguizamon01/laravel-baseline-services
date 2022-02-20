@@ -13,7 +13,7 @@ class UserAuthController extends Controller
 
     public function __invoke(Request $request)
     {
-        $auths = $this->userAuthService->__invoke($request);
-        return response()->json($auths, Response::HTTP_OK);
+        $authUser = $this->userAuthService->__invoke($request);
+        return response()->json($authUser, Response::HTTP_OK);
     }
 }

@@ -1,0 +1,18 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ moduleNamespace }}\{{ class }};
+
+class {{ Action }}{{ class }}Service extends Common{{ class }}Service
+{
+    public function __invoke($request)
+    {
+        return $this->logErrors(fn() => $this->{{ action }}($request));
+    }
+
+    private function {{ action }}($request)
+    {
+        return;
+    }
+}

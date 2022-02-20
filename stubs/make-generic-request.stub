@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Modules\main\OrderModule\Requests;
+namespace {{ namespace }};
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreOrderRequest extends FormRequest
+class {{ Action }}{{ class }}Request extends FormRequest
 {
     public function authorize()
     {

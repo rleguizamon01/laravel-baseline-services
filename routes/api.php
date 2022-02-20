@@ -2,9 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => 'auth:passport'], function() {
+include('routes/ApiModules/public.php');
 
-    include('routes/ApiModules/auth.php');
+include('App\Modules\Auth\AuthModule\auth-routes.php');
+
+Route::group(['middleware' => 'auth:api'], function() {
     include('routes/ApiModules/main.php');
-    include('routes/ApiModules/public.php');
 });
